@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - statistics@localhost" uuid="88a06f01-540f-4e0e-aa73-3ce4617bfbf8">
+    <database-info product="MySQL" version="5.5.24" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.31 ( Revision: alexander.soklakov@oracle.com-20140520065950-groqzzbvxprqdmnz )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="statistics"/>
+    <table name="author" schema="" catalog="statistics" type="TABLE">
+      <column name="author_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="first_name" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="last_name" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="author_id"/>
+      <exported-key name="news_author" table="news" schema="" catalog="statistics" columns="author_id"/>
+    </table>
+    <table name="news" schema="" catalog="statistics" type="TABLE">
+      <column name="news_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="author_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="news_contents" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" def="JzAn"/>
+      <column name="publish_data" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="news_id"/>
+      <foreign-key name="news_author" columns="author_id" ref-table="author" ref-schema="" ref-catalog="statistics" ref-columns="author_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK1" table="smi_news_region" schema="" catalog="statistics" columns="news_id"/>
+      <index name="news_author" unique="false" columns="author_id"/>
+    </table>
+    <table name="region" schema="" catalog="statistics" type="TABLE">
+      <column name="region_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="title" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="region_id"/>
+      <exported-key name="FK__region" table="smi_news_region" schema="" catalog="statistics" columns="region_id"/>
+    </table>
+    <table name="smi" schema="" catalog="statistics" type="TABLE">
+      <column name="smi_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="title" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="smi_id"/>
+      <exported-key name="FK__smi" table="smi_news_region" schema="" catalog="statistics" columns="smi_id"/>
+    </table>
+    <table name="smi_news_region" schema="" catalog="statistics" type="TABLE">
+      <column name="smi_news_region_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="news_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="region_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="smi_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="purchase_count" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="smi_news_region_id"/>
+      <foreign-key name="FK1" columns="news_id" ref-table="news" ref-schema="" ref-catalog="statistics" ref-columns="news_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK__region" columns="region_id" ref-table="region" ref-schema="" ref-catalog="statistics" ref-columns="region_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK__smi" columns="smi_id" ref-table="smi" ref-schema="" ref-catalog="statistics" ref-columns="smi_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK1" unique="false" columns="news_id"/>
+      <index name="FK__region" unique="false" columns="region_id"/>
+      <index name="FK__smi" unique="false" columns="smi_id"/>
+    </table>
+  </data-source>
+</component>
